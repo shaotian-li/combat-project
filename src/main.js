@@ -9,8 +9,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/normalize.css'
 import plugins from '@/plugins'
+import directives from '@/directives'
 
 Vue.use(ElementUI)
+Vue.use(directives)
 Vue.use(plugins)
 
 Vue.config.productionTip = false

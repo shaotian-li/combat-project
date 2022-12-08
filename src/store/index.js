@@ -23,9 +23,16 @@ modulesFn.keys().forEach((filepath) => {
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-	state: {},
+	state: {
+		loadings: { tab1: true },
+	},
 	getters: {},
-	mutations: {},
+	mutations: {
+		// 某一个开关loading状态改变
+		settab1({ loadings }, payload) {
+			loadings.tab1 = payload
+		},
+	},
 	actions: {},
 	modules: modules,
 })
