@@ -81,6 +81,7 @@ const loadMenus = async (next, to) => {
 
 	// 保存用户菜单 生成左侧菜单栏
 	store.commit('user/changeUserMenus', res.data)
+	console.log(to, '=====')
 	next({ ...to, replace: true })
 }
 
@@ -104,6 +105,12 @@ router.beforeEach((to, form, next) => {
 		if (!store.getters['user/getUserMenus']) {
 			loadMenus(next, to)
 		} else {
+			if (to.name) {
+				store.commit('user/addTag', {
+					title: to?.meta?.title,
+					compName: to.name,
+				})
+			}
 			next() // 有菜单
 		}
 	} else {

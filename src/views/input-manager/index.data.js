@@ -1,3 +1,8 @@
+export const sexOptions = [
+	{ value: 'man', label: '男' },
+	{ value: 'woman', label: '女' },
+]
+
 export default {
 	options: {
 		// height: 600,
@@ -20,6 +25,7 @@ export default {
 		{
 			label: '出生日期',
 			prop: 'birthday',
+			slot: 'birthday',
 		},
 		{
 			label: '性别',

@@ -86,6 +86,7 @@ export default {
 				case 'textarea':
 					return (
 						<el-input
+							attrs={item.attrs}
 							placeholder={`请输入${item.label}`}
 							v-model={this.form[item.key]}
 							type={item.type}
@@ -94,14 +95,23 @@ export default {
 				case 'radio':
 					return item.options.map((opt, i) => {
 						return (
-							<el-radio v-model={this.form[item.key]} key={i} label={opt.label}>
+							<el-radio
+								attrs={item.attrs}
+								v-model={this.form[item.key]}
+								key={i}
+								label={opt.label}
+							>
 								{opt.text}
 							</el-radio>
 						)
 					})
 				case 'select':
 					return (
-						<el-select v-model={this.form[item.key]} attrs={item.attrs}>
+						<el-select
+							attrs={item.attrs}
+							v-model={this.form[item.key]}
+							attrs={item.attrs}
+						>
 							{item.options.map((opt) => {
 								return (
 									<el-option

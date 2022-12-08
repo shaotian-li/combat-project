@@ -36,6 +36,7 @@
 import { pager, crud } from '@/mixins'
 import config from './data'
 export default {
+	name: 'loan-first',
 	mixins: [pager, crud],
 	data() {
 		return {

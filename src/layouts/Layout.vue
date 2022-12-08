@@ -22,7 +22,21 @@
 				</div>
 			</el-header>
 			<el-main>
-				<router-view />
+				<div class="tags-box">
+					<el-tag
+						@click="$router.push({ name: t.compName })"
+						@close="delTag(t)"
+						closable
+						v-for="(t, i) in tags"
+						:key="i"
+						>{{ t.title }}</el-tag
+					>
+				</div>
+				<transition name="fade" mode="out-in">
+					<keep-alive :max="40" :include="getTagsCompName">
+						<router-view />
+					</keep-alive>
+				</transition>
 			</el-main>
 			<el-footer>Footer</el-footer>
 		</el-container>
@@ -30,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
 	data() {
 		return {
@@ -40,16 +54,23 @@ export default {
 	computed: {
 		...mapGetters({
 			menus: 'user/getUserMenus',
+			tags: 'user/getTags',
 		}),
+		getTagsCompName() {
+			return this.tags.map((e) => e.compName)
+		},
 	},
 
 	methods: {
 		...mapActions({
 			logout: 'user/doLogout',
 		}),
+		...mapMutations({
+			delTag: 'user/delTag',
+		}),
 		async command(e) {
 			if (e === 'logout') {
-				let [res, err] = await this.logout()
+				await this.logout()
 				window.location.reload()
 			}
 		},
@@ -91,5 +112,17 @@ body > .el-container {
 }
 .el-menu-vertical-demo {
 	border: none;
+}
+.tags-box {
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
 }
 </style>

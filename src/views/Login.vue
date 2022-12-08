@@ -36,6 +36,19 @@ import { mapMutations } from 'vuex'
 import { Login } from '@/apis/user'
 
 export default {
+	mounted() {
+		this.enterLogin = (e) => {
+			if (e.key == 'Enter') {
+				// 兼容数字键盘回车
+				this.Login(this.ruleForm)
+			}
+			console.log(e, '-----')
+		}
+		window.addEventListener('keypress', this.enterLogin)
+	},
+	beforeDestroy() {
+		window.removeEventListener('keypress', this.enterLogin)
+	},
 	data() {
 		var validatePass = (rule, value, callback) => {
 			if (value === '') {

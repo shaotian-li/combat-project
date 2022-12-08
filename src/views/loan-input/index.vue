@@ -6,6 +6,7 @@
 import config from './config'
 import { loanCreate } from '@/apis/loan'
 export default {
+	name: 'loan-input',
 	data() {
 		return {
 			config,
